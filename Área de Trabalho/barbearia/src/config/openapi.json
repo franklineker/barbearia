@@ -1,0 +1,1669 @@
+{
+    "definition": {
+        "openapi": "3.0.3",
+        "info": {
+            "title": "API Barbearia",
+            "description": "API responsável pelo gerenciamento da agenda de uma barbearia e seus componetes",
+            "contact": {
+                "name": "Barbearia Tal",
+                "url": "https://localhost:3000/contato",
+                "email": "email@dabarbearia.com"
+            },
+            "version": "1.0.0",
+            "license": {}
+        },
+        "servers": [
+            {
+                "url": "http://localhost:3000",
+                "description": "servidor de desenvolvimento"
+            }
+        ],
+        "paths": {
+            "/agenda": {
+                "get": {
+                    "summary": "Lista de agendamentos",
+                    "description": "Rota responsável por retornar a lista de agendamentos da barbearia",
+                    "tags": [
+                        "Agenda"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/agendamento"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Registra agendamento",
+                    "description": "Rota responsável por fazer o registro de um agendamento",
+                    "tags": [
+                        "Agenda"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/agendamento"
+                                },
+                                "examples": {
+                                    "agendamento": {
+                                        "value": {
+                                            "id": 1,
+                                            "cliente": "Fulano",
+                                            "barbeiro": "Ciclano",
+                                            "cadeira": 3,
+                                            "data": "01/01/2021",
+                                            "hora": "10:00"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "aplication/json": {
+                                    "schema": {
+                                            "$ref":"#/components/schemas/agendamento"
+                                    }
+                                }
+                            }
+
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        }
+                    }
+                }
+            },
+            "/agenda/{id}": {
+                "get": {
+                    "summary": "Agedamento por id",
+                    "description": "Rota responsável por retornar um agendamento pelo id",
+                    "tags": [
+                        "Agenda"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do agendamento",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/agendamento"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualizar um agendamento",
+                    "description": "Rota responsável por atualizar um agendamento pelo id",
+                    "tags": [
+                        "Agenda"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do agendamento",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/agendamento"
+                                },
+                                "examples": {
+                                    "agendamento": {
+                                        "value": {
+                                            "cliente": "Fulano",
+                                            "barbeiro": "Ciclano",
+                                            "cadeira": 3,
+                                            "data": "01/01/2021",
+                                            "hora": "10:00"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/agendamento"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Excluir agendamento",
+                    "description": "Rota responsável pro excluir um agendamento pelo id",
+                    "tags": [
+                        "Agenda"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do agendamento",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/agendamento"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/clientes": {
+                "get": {
+                    "summary": "lista de clientes",
+                    "description": "Rota responsável por retornar a lista de clientes cadastrados",
+                    "tags": [
+                        "Clientes"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cliente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Cadastrar cliente",
+                    "description": "Rota responsável por rcadastrar um novo cliente",
+                    "tags": [
+                        "Clientes"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cliente"
+                                },
+                                "examples": {
+                                    "cliente": {
+                                        "value": {
+                                            "cpf": "00000000000",
+                                            "nome": "Zé Luca",
+                                            "sobrenome": "De Nada",
+                                            "telefone": "11936523652",
+                                            "email": "zeluca@denada.com",
+                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "senha": "1234",
+                                            "admin": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cliente"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                }
+            },
+            "/clientes/{cpf}": {
+                "get": {
+                    "summary": "Cliente por cpf",
+                    "description": "Rota responsável por retornar um cliente pelo cpf",
+                    "tags": [
+                        "Clientes"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "cpf",
+                            "in": "path",
+                            "description": "cpf do cliente",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cliente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualiza um cliente",
+                    "description": "Rota responsável por atualizar um cliente pelo cpf",
+                    "tags": [
+                        "Clientes"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "cpf",
+                            "in": "path",
+                            "descriptio": "cpf do cliente",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cliente"
+                                },
+                                "examples": {
+                                    "cliente": {
+                                        "value": {
+                                            "nome": "Zé Luca",
+                                            "sobrenome": "De Nada",
+                                            "telefone": "11936523652",
+                                            "email": "zeluca@denada.com",
+                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "senha": "1234",
+                                            "admin": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cliente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Exclui um cliente pelo cpf",
+                    "description": "Rota responsável por excluir um cliente pelo cpf",
+                    "tags": [
+                        "Clientes"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "cpf",
+                            "in": "path",
+                            "description": "cpf do cliente",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cliente"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/barbeiros": {
+                "get": {
+                    "summary": "lista de barbeiros",
+                    "description": "Rota responsável por retornar a lista de barbeiros cadastrados",
+                    "tags": [
+                        "Barbeiros"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/barbeiro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Cadastrar barbeiro",
+                    "description": "Rota responsável por cadastrar um novo barbeiro",
+                    "tags": [
+                        "Barbeiros"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/barbeiro"
+                                },
+                                "examples": {
+                                    "barbeiro": {
+                                        "value": {
+                                            "cpf": "00000000000",
+                                            "nome": "Zé Luca",
+                                            "sobrenome": "De Nada",
+                                            "telefone": "11936523652",
+                                            "email": "zeluca@denada.com",
+                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "sobre": "Lorem ipsum fake",
+                                            "senha": "1234",
+                                            "admin": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/barbeiro"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                }
+            },
+            "/barbeiros/{cpf}": {
+                "get": {
+                    "summary": "Barbeiro por cpf",
+                    "description": "Rota responsável por retornar um barbeiro pelo cpf",
+                    "tags": [
+                        "Barbeiros"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "cpf",
+                            "in": "path",
+                            "description": "cpf do barbeiro",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/barbeiro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualiza um barbeiro",
+                    "description": "Rota responsável por atualizar um barbeiro pelo cpf",
+                    "tags": [
+                        "Barbeiros"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "cpf",
+                            "in": "path",
+                            "descriptio": "cpf do barbeiro",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/barbeiro"
+                                },
+                                "examples": {
+                                    "cliente": {
+                                        "value": {
+                                            "nome": "Zé Luca",
+                                            "sobrenome": "De Nada",
+                                            "telefone": "11936523652",
+                                            "email": "zeluca@denada.com",
+                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "sobre": "Lorem ipsum fake",
+                                            "senha": "1234",
+                                            "admin": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/barbeiro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Exclui um barbeiro pelo cpf",
+                    "description": "Rota responsável por excluir um barbeiro pelo cpf",
+                    "tags": [
+                        "Barbeiros"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "cpf",
+                            "in": "path",
+                            "description": "cpf do barbeiro",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/barbeiro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin": {
+                "get": {
+                    "summary": "lista de administrativos",
+                    "description": "Rota responsável por retornar a lista usuários administrativos cadastrados",
+                    "tags": [
+                        "Administrativo"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/admin"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Cadastrar administrativo",
+                    "description": "Rota responsável por cadastrar um novo usuário administrativo",
+                    "tags": [
+                        "Administrativo"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/admin"
+                                },
+                                "examples": {
+                                    "admin": {
+                                        "value": {
+                                            "id": 1,
+                                            "nome": "Zé Luca",
+                                            "sobrenome": "De Nada",
+                                            "telefone": "11936523652",
+                                            "email": "zeluca@denada.com",
+                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "sobre": "Lorem ipsum fake",
+                                            "senha": "1234",
+                                            "admin": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/admin"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                }
+            },
+            "/admin/{id}": {
+                "get": {
+                    "summary": "Administrativo por id",
+                    "description": "Rota responsável por retornar um administrativo pelo id",
+                    "tags": [
+                        "Administrativo"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do administrativo",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/admin"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualiza um administrativo",
+                    "description": "Rota responsável por atualizar um administrativo pelo id",
+                    "tags": [
+                        "Administrativo"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "descriptio": "id do administrativo",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/admin"
+                                },
+                                "examples": {
+                                    "admin": {
+                                        "value": {
+                                            "id": 1,
+                                            "nome": "Zé Luca",
+                                            "sobrenome": "De Nada",
+                                            "telefone": "11936523652",
+                                            "email": "zeluca@denada.com",
+                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "senha": "1234",
+                                            "admin": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/admin"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Exclui um administrativo pelo id",
+                    "description": "Rota responsável por excluir um administrativo pelo id",
+                    "tags": [
+                        "Administrativo"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do administrativo",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/admin"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/cortes": {
+                "get": {
+                    "summary": "lista de cortes",
+                    "description": "Rota responsável por retornar a lista de cortes e seus preços",
+                    "tags": [
+                        "Cortes"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/corte"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Cadastrar um corte e seu preço",
+                    "description": "Rota responsável por cadastrar um novo corte e seu preço",
+                    "tags": [
+                        "Cortes"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/corte"
+                                },
+                                "parameters": {},
+                                "examples": {
+                                    "corte": {
+                                        "value": {
+                                            "id": 1,
+                                            "titulo": "Moicano",
+                                            "descricao": "Este corte é assim e assado",
+                                            "corte": 35.0
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/corte"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                }
+            },
+            "/cortes/{id}": {
+                "get": {
+                    "summary": "Corte por id",
+                    "description": "Rota responsável por retornar um corte pelo id",
+                    "tags": [
+                        "Cortes"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do corte",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/corte"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualiza um corte",
+                    "description": "Rota responsável por atualizar um corte pelo id",
+                    "tags": [
+                        "Cortes"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do corte",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/corte"
+                                },
+                                "examples": {
+                                    "corte": {
+                                        "value": {
+                                            "titulo": "Moicano",
+                                            "descricao": "Este corte é assim e assado",
+                                            "corte": 35.0
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/corte"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Exclui um corte pelo id",
+                    "description": "Rota responsável por excluir um corte pelo id",
+                    "tags": [
+                        "Cortes"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do corte",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/corte"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/cadeiras": {
+                "get": {
+                    "summary": "lista de cadeiras",
+                    "description": "Rota responsável por retornar a lista de cadeiras cadastradas no sistema",
+                    "tags": [
+                        "Cadeiras"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cadeira"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Cadastrar um cadeira e seu preço",
+                    "description": "Rota responsável por cadastrar um novo cadeira e seu preço",
+                    "tags": [
+                        "Cadeiras"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cadeira"
+                                },
+                                "examples": {
+                                    "cadeira": {
+                                        "value": {
+                                            "id": 1,
+                                            "barbeiro": "Beltrano"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cadeira"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                }
+            },
+            "/cadeiras/{id}": {
+                "get": {
+                    "summary": "cadeira por id",
+                    "description": "Rota responsável por retornar uma cadeira pelo id",
+                    "tags": [
+                        "Cadeiras"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do cadeira",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cadeira"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualiza uma cadeira",
+                    "description": "Rota responsável por atualizar uma cadeira pelo id",
+                    "tags": [
+                        "Cadeiras"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do cadeira",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cadeira"
+                                },
+                                "examples": {
+                                    "cadeira": {
+                                        "value": {
+                                            "barbeiro": "barbeiro"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cadeira"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Exclui uma cadeira pelo id",
+                    "description": "Rota responsável por excluir uma cadeira pelo id",
+                    "tags": [
+                        "Cadeiras"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do cadeira",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/cadeira"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/relatorios": {
+                "get": {
+                    "summary": "lista de relatórios",
+                    "description": "Rota responsável por retornar a lista de relatórios cadastradas no sistema",
+                    "tags": [
+                        "Relatórios"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/relatorio"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post": {
+                    "summary": "Cadastrar um relatório e seu preço",
+                    "description": "Rota responsável por cadastrar um novo relatório e seu preço",
+                    "tags": [
+                        "Relatórios"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/relatorio"
+                                },
+                                "examples": {
+                                    "relatorio": {
+                                        "value": {
+                                            "id": 1,
+                                            "dataInicio": "01/01/2022",
+                                            "dataFim": "31/01/2022",
+                                            "atendimentosDiarios": 10,
+                                            "receitaDiaria": 890.75,
+                                            "repasseDiario": 530.75,
+                                            "lucroDiario": 260.0,
+                                            "corteMaisVendido": "Moicano"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/relatorio"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                }
+            },
+            "/relatorios/{id}": {
+                "get": {
+                    "summary": "Relatório por id",
+                    "description": "Rota responsável por retornar um relatório pelo id",
+                    "tags": [
+                        "Relatórios"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do Relatório",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/relatorio"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "put": {
+                    "summary": "Atualiza um relatório",
+                    "description": "Rota responsável por atualizar um relatório pelo id",
+                    "tags": [
+                        "Relatórios"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do relatório",
+                            "required": true
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/relatorio"
+                                },
+                                "examples": {
+                                    "relatorio": {
+                                        "value": {
+                                            "dataInicio": "01/01/2022",
+                                            "dataFim": "31/01/2022",
+                                            "atendimentosDiarios": 10,
+                                            "receitaDiaria": 890.75,
+                                            "repasseDiario": 530.75,
+                                            "lucroDiario": 260.0,
+                                            "corteMaisVendido": "Moicano"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/relatorio"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete": {
+                    "summary": "Exclui um relatório pelo id",
+                    "description": "Rota responsável por excluir um relatório pelo id",
+                    "tags": [
+                        "Relatórios"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do relatório",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/relatorio"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/contato/emails": {
+                "post": {
+                    "summary": "Envio de email",
+                    "description": "Rota responsável por enviar um email para a barbearia",
+                    "tags": [
+                        "Contato"
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/email"
+                                },
+                                "examples": {
+                                    "relatorio": {
+                                        "value": {
+                                            "id": 1,
+                                            "nome": "Beltrano",
+                                            "email": "Beltrano@Beltrano.com",
+                                            "assunto": "Qualquer coisa",
+                                            "mensagem": "lorem ipsum fake"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Created",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/email"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        }
+                    }
+                },
+                "get": {
+                    "summary": "lista de emails",
+                    "description": "Rota responsável por retornar a lista de emails cadastradas no sistema",
+                    "tags": [
+                        "Contato"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/email"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/contato/emails/{id}": {
+                "get": {
+                    "summary": "Email por id",
+                    "description": "Rota responsável por retornar um email pelo id",
+                    "tags": [
+                        "Contato"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "description": "id do email",
+                            "required": true
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/email"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/endereco": {
+                "get": {
+                    "summary": "Localização da barbearia",
+                    "description": "Rota responsável por retornar o local da barbearia no maps",
+                    "tags": [
+                        "Endereço"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Ok",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/endereco"
+                                        }
+                                    },
+                                    "examples": {
+                                        "endereco": {
+                                            "value": {
+                                                "localização": "local no Google maps"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "agendamento": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "cliente": {
+                                "type": "Cliente"
+                            },
+                            "barbeiro": {
+                                "type": "Barbeiro"
+                            },
+                            "cadeira": {
+                                "type": "Cadeira"
+                            },
+                            "data": {
+                                "type": "Date"
+                            },
+                            "hora": {
+                                "type": "Date"
+                            }
+                        }
+                    }
+                },
+                "cliente": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "nome": {
+                                "type": "string"
+                            },
+                            "cpf": {
+                                "type": "string"
+                            },
+                            "sobrenome": {
+                                "type": "string"
+                            },
+                            "telefone": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "endereco": {
+                                "type": "string"
+                            },
+                            "senha": {
+                                "type": "string"
+                            },
+                            "admin": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                },
+                "barbeiro": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "nome": {
+                                "type": "string"
+                            },
+                            "cpf": {
+                                "type": "string"
+                            },
+                            "sobrenome": {
+                                "type": "string"
+                            },
+                            "telefone": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "endereco": {
+                                "type": "string"
+                            },
+                            "sobre": {
+                                "type": "string"
+                            },
+                            "senha": {
+                                "type": "string"
+                            },
+                            "admin": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                },
+                "admin": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "nome": {
+                                "type": "string"
+                            },
+                            "cpf": {
+                                "type": "string"
+                            },
+                            "sobrenome": {
+                                "type": "string"
+                            },
+                            "telefone": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "endereco": {
+                                "type": "string"
+                            },
+                            "senha": {
+                                "type": "string"
+                            },
+                            "admin": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                },
+                "corte": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "titulo": {
+                                "type": "string"
+                            },
+                            "preco": {
+                                "type": "number"
+                            },
+                            "descricao": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "cadeira": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "barbeiro": {
+                                "type": "Barbeiro"
+                            }
+                        }
+                    }
+                },
+                "relatorio": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "dataInicio": {
+                        "type": "date"
+                    },
+                    "dataFim": {
+                        "type": "date"
+                    },
+                    "atendimentosDiarios": {
+                        "type": "number"
+                    },
+                    "receitaDiaria": {
+                        "type": "number"
+                    },
+                    "repasseDiario": {
+                        "type": "number"
+                    },
+                    "lucroDiario": {
+                        "type": "number"
+                    },
+                    "corteMaisVendido": {
+                        "type": "Corte"
+                    }
+                },
+                "email": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "assunto": {
+                        "type": "string"
+                    },
+                    "mensagem": {
+                        "type": "string"
+                    }
+                },
+                "endereco": {
+                    "local": {
+                        "type": "Google maps"
+                    }
+                }
+            }
+        }
+    },
+    "apis": [
+        "../api/*.js"
+    ]
+}
