@@ -1,7 +1,7 @@
 const db = require('../config/db.json')
 
 module.exports = app => {
-    const admins = db.admin
+    const admins = db.admins
     const getAdmin = (req, res) => {
         if (admins) {
             return res.send(admins)
@@ -62,5 +62,9 @@ module.exports = app => {
         }
     }
 
-    return { getAdmin, getAdminById, setAdmin, updateAdmin, deleteAdmin }
+    const showLocation = (req, res) => {
+        return res.send('Aqui aparecerá a localização da barbearia no Google Maps.')
+    }
+
+    return { getAdmin, getAdminById, setAdmin, updateAdmin, deleteAdmin, showLocation }
 }

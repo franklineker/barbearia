@@ -19,7 +19,7 @@
             }
         ],
         "paths": {
-            "/agenda": {
+            "/appointment": {
                 "get": {
                     "summary": "Lista de agendamentos",
                     "description": "Rota responsável por retornar a lista de agendamentos da barbearia",
@@ -32,10 +32,17 @@
                             "content": {
                                 "application/json": {
                                     "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/components/schemas/agendamento"
-                                        }
+                                        "$ref": "#/components/schemas/appointment"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -52,17 +59,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/agendamento"
+                                    "$ref": "#/components/schemas/appointment"
                                 },
                                 "examples": {
-                                    "agendamento": {
+                                    "appointment": {
                                         "value": {
                                             "id": 1,
-                                            "cliente": "Fulano",
-                                            "barbeiro": "Ciclano",
-                                            "cadeira": 3,
-                                            "data": "01/01/2021",
-                                            "hora": "10:00"
+                                            "client": "Fulano",
+                                            "barber": "Ciclano",
+                                            "chair": 3,
+                                            "date": "01/01/2021T15:30:00"
                                         }
                                     }
                                 }
@@ -75,22 +81,36 @@
                             "content": {
                                 "aplication/json": {
                                     "schema": {
-                                            "$ref":"#/components/schemas/agendamento"
+                                            "$ref":"#/components/schemas/appointment"
                                     }
                                 }
                             }
 
                         },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         },
-                        "401": {
-                            "description": "Unauthorized"
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/agenda/{id}": {
+            "/appointment/{id}": {
                 "get": {
                     "summary": "Agedamento por id",
                     "description": "Rota responsável por retornar um agendamento pelo id",
@@ -111,7 +131,17 @@
                             "content": {
                                 "application/json": {
                                     "schema": {
-                                        "$ref": "#/components/schemas/agendamento"
+                                        "$ref": "#/components/schemas/appointment"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -136,16 +166,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/agendamento"
+                                    "$ref": "#/components/schemas/appointment"
                                 },
                                 "examples": {
-                                    "agendamento": {
+                                    "appointment": {
                                         "value": {
-                                            "cliente": "Fulano",
-                                            "barbeiro": "Ciclano",
-                                            "cadeira": 3,
-                                            "data": "01/01/2021",
-                                            "hora": "10:00"
+                                            "client": "Fulano",
+                                            "barber": "Ciclano",
+                                            "chair": 3,
+                                            "date": "01/01/2021",
+                                            "hour": "10:00"
                                         }
                                     }
                                 }
@@ -158,7 +188,27 @@
                             "content": {
                                 "application/json": {
                                     "schema": {
-                                        "$ref": "#/components/schemas/agendamento"
+                                        "$ref": "#/components/schemas/appointment"
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -185,7 +235,27 @@
                             "content": {
                                 "application/json": {
                                     "schema": {
-                                        "$ref": "#/components/schemas/agendamento"
+                                        "$ref": "#/components/schemas/appointment"
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -193,7 +263,7 @@
                     }
                 }
             },
-            "/clientes": {
+            "/clients": {
                 "get": {
                     "summary": "lista de clientes",
                     "description": "Rota responsável por retornar a lista de clientes cadastrados",
@@ -208,8 +278,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cliente"
+                                            "$ref": "#/components/schemas/client"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -226,10 +306,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cliente"
+                                    "$ref": "#/components/schemas/client"
                                 },
                                 "examples": {
-                                    "cliente": {
+                                    "client": {
                                         "value": {
                                             "cpf": "00000000000",
                                             "nome": "Zé Luca",
@@ -253,22 +333,36 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cliente"
+                                            "$ref": "#/components/schemas/client"
                                         }
                                     }
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/clientes/{cpf}": {
+            "/clients/{cpf}": {
                 "get": {
                     "summary": "Cliente por cpf",
                     "description": "Rota responsável por retornar um cliente pelo cpf",
@@ -291,8 +385,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cliente"
+                                            "$ref": "#/components/schemas/client"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -317,10 +421,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cliente"
+                                    "$ref": "#/components/schemas/client"
                                 },
                                 "examples": {
-                                    "cliente": {
+                                    "client": {
                                         "value": {
                                             "nome": "Zé Luca",
                                             "sobrenome": "De Nada",
@@ -343,8 +447,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cliente"
+                                            "$ref": "#/components/schemas/client"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -373,8 +497,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cliente"
+                                            "$ref": "#/components/schemas/client"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -382,7 +526,7 @@
                     }
                 }
             },
-            "/barbeiros": {
+            "/barbers": {
                 "get": {
                     "summary": "lista de barbeiros",
                     "description": "Rota responsável por retornar a lista de barbeiros cadastrados",
@@ -397,8 +541,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/barbeiro"
+                                            "$ref": "#/components/schemas/barber"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -415,10 +569,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/barbeiro"
+                                    "$ref": "#/components/schemas/barber"
                                 },
                                 "examples": {
-                                    "barbeiro": {
+                                    "barber": {
                                         "value": {
                                             "cpf": "00000000000",
                                             "nome": "Zé Luca",
@@ -443,22 +597,36 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/barbeiro"
+                                            "$ref": "#/components/schemas/barber"
                                         }
                                     }
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/barbeiros/{cpf}": {
+            "/barbers/{cpf}": {
                 "get": {
                     "summary": "Barbeiro por cpf",
                     "description": "Rota responsável por retornar um barbeiro pelo cpf",
@@ -481,8 +649,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/barbeiro"
+                                            "$ref": "#/components/schemas/barber"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -507,10 +685,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/barbeiro"
+                                    "$ref": "#/components/schemas/barber"
                                 },
                                 "examples": {
-                                    "cliente": {
+                                    "barber": {
                                         "value": {
                                             "nome": "Zé Luca",
                                             "sobrenome": "De Nada",
@@ -534,8 +712,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/barbeiro"
+                                            "$ref": "#/components/schemas/barber"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -564,8 +762,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/barbeiro"
+                                            "$ref": "#/components/schemas/barber"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -593,6 +811,16 @@
                                     }
                                 }
                             }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -612,13 +840,13 @@
                                     "admin": {
                                         "value": {
                                             "id": 1,
-                                            "nome": "Zé Luca",
-                                            "sobrenome": "De Nada",
-                                            "telefone": "11936523652",
+                                            "name": "Zé Luca",
+                                            "lastName": "De Nada",
+                                            "phone": "11936523652",
                                             "email": "zeluca@denada.com",
-                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
-                                            "sobre": "Lorem ipsum fake",
-                                            "senha": "1234",
+                                            "adddress": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "about": "Lorem ipsum fake",
+                                            "password": "1234",
                                             "admin": true
                                         }
                                     }
@@ -640,11 +868,25 @@
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -677,6 +919,16 @@
                                     }
                                 }
                             }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -704,12 +956,12 @@
                                     "admin": {
                                         "value": {
                                             "id": 1,
-                                            "nome": "Zé Luca",
-                                            "sobrenome": "De Nada",
-                                            "telefone": "11936523652",
+                                            "name": "Zé Luca",
+                                            "lastName": "De Nada",
+                                            "phone": "11936523652",
                                             "email": "zeluca@denada.com",
-                                            "endreco": "Rua Tal, 00, Lugar Nenhum - BA",
-                                            "senha": "1234",
+                                            "adddress": "Rua Tal, 00, Lugar Nenhum - BA",
+                                            "password": "1234",
                                             "admin": false
                                         }
                                     }
@@ -727,6 +979,26 @@
                                         "items": {
                                             "$ref": "#/components/schemas/admin"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -760,11 +1032,31 @@
                                     }
                                 }
                             }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/cortes": {
+            "/orders": {
                 "get": {
                     "summary": "lista de cortes",
                     "description": "Rota responsável por retornar a lista de cortes e seus preços",
@@ -779,8 +1071,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/corte"
+                                            "$ref": "#/components/schemas/order"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -797,16 +1099,16 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/corte"
+                                    "$ref": "#/components/schemas/order"
                                 },
                                 "parameters": {},
                                 "examples": {
-                                    "corte": {
+                                    "order": {
                                         "value": {
                                             "id": 1,
-                                            "titulo": "Moicano",
-                                            "descricao": "Este corte é assim e assado",
-                                            "corte": 35.0
+                                            "title": "Moicano",
+                                            "description": "Este corte é assim e assado",
+                                            "order": 35.0
                                         }
                                     }
                                 }
@@ -821,22 +1123,36 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/corte"
+                                            "$ref": "#/components/schemas/order"
                                         }
                                     }
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/cortes/{id}": {
+            "/orders/{id}": {
                 "get": {
                     "summary": "Corte por id",
                     "description": "Rota responsável por retornar um corte pelo id",
@@ -859,8 +1175,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/corte"
+                                            "$ref": "#/components/schemas/order"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -885,14 +1211,14 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/corte"
+                                    "$ref": "#/components/schemas/order"
                                 },
                                 "examples": {
-                                    "corte": {
+                                    "order": {
                                         "value": {
-                                            "titulo": "Moicano",
-                                            "descricao": "Este corte é assim e assado",
-                                            "corte": 35.0
+                                            "title": "Moicano",
+                                            "description": "Este corte é assim e assado",
+                                            "order": 35.0
                                         }
                                     }
                                 }
@@ -907,8 +1233,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/corte"
+                                            "$ref": "#/components/schemas/order"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -937,8 +1283,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/corte"
+                                            "$ref": "#/components/schemas/order"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -946,7 +1312,7 @@
                     }
                 }
             },
-            "/cadeiras": {
+            "/chairs": {
                 "get": {
                     "summary": "lista de cadeiras",
                     "description": "Rota responsável por retornar a lista de cadeiras cadastradas no sistema",
@@ -961,8 +1327,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cadeira"
+                                            "$ref": "#/components/schemas/chair"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -979,13 +1355,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cadeira"
+                                    "$ref": "#/components/schemas/chair"
                                 },
                                 "examples": {
-                                    "cadeira": {
+                                    "chair": {
                                         "value": {
                                             "id": 1,
-                                            "barbeiro": "Beltrano"
+                                            "barber": "Beltrano"
                                         }
                                     }
                                 }
@@ -1000,22 +1376,36 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cadeira"
+                                            "$ref": "#/components/schemas/chair"
                                         }
                                     }
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/cadeiras/{id}": {
+            "/chairs/{id}": {
                 "get": {
                     "summary": "cadeira por id",
                     "description": "Rota responsável por retornar uma cadeira pelo id",
@@ -1038,8 +1428,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cadeira"
+                                            "$ref": "#/components/schemas/chair"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1064,12 +1464,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/cadeira"
+                                    "$ref": "#/components/schemas/chair"
                                 },
                                 "examples": {
-                                    "cadeira": {
+                                    "chair": {
                                         "value": {
-                                            "barbeiro": "barbeiro"
+                                            "barber": "barbeiro"
                                         }
                                     }
                                 }
@@ -1084,8 +1484,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cadeira"
+                                            "$ref": "#/components/schemas/chair"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1114,8 +1534,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/cadeira"
+                                            "$ref": "#/components/schemas/chair"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1123,7 +1563,7 @@
                     }
                 }
             },
-            "/relatorios": {
+            "/reports": {
                 "get": {
                     "summary": "lista de relatórios",
                     "description": "Rota responsável por retornar a lista de relatórios cadastradas no sistema",
@@ -1138,8 +1578,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/relatorio"
+                                            "$ref": "#/components/schemas/report"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1156,19 +1606,19 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/relatorio"
+                                    "$ref": "#/components/schemas/report"
                                 },
                                 "examples": {
-                                    "relatorio": {
+                                    "report": {
                                         "value": {
                                             "id": 1,
-                                            "dataInicio": "01/01/2022",
-                                            "dataFim": "31/01/2022",
-                                            "atendimentosDiarios": 10,
-                                            "receitaDiaria": 890.75,
-                                            "repasseDiario": 530.75,
-                                            "lucroDiario": 260.0,
-                                            "corteMaisVendido": "Moicano"
+                                            "startDate": "01/01/2022",
+                                            "endDate": "31/01/2022",
+                                            "daylyAppointments": 10,
+                                            "daylyIncome": 890.75,
+                                            "daylyTransfer": 530.75,
+                                            "daylyProfit": 260.0,
+                                            "besteSellerOrder": "Moicano"
                                         }
                                     }
                                 }
@@ -1183,22 +1633,36 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/relatorio"
+                                            "$ref": "#/components/schemas/report"
                                         }
                                     }
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/relatorios/{id}": {
+            "/reports/{id}": {
                 "get": {
                     "summary": "Relatório por id",
                     "description": "Rota responsável por retornar um relatório pelo id",
@@ -1221,8 +1685,18 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/relatorio"
+                                            "$ref": "#/components/schemas/report"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1247,18 +1721,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/relatorio"
+                                    "$ref": "#/components/schemas/report"
                                 },
                                 "examples": {
-                                    "relatorio": {
+                                    "report": {
                                         "value": {
-                                            "dataInicio": "01/01/2022",
-                                            "dataFim": "31/01/2022",
-                                            "atendimentosDiarios": 10,
-                                            "receitaDiaria": 890.75,
-                                            "repasseDiario": 530.75,
-                                            "lucroDiario": 260.0,
-                                            "corteMaisVendido": "Moicano"
+                                            "startDate": "01/01/2022",
+                                            "endDate": "31/01/2022",
+                                            "daylyAppointments": 10,
+                                            "daylyIncome": 890.75,
+                                            "daylyTransfer": 530.75,
+                                            "daylyProfit": 260.0,
+                                            "besteSellerOrder": "Moicano"
                                         }
                                     }
                                 }
@@ -1273,8 +1747,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/relatorio"
+                                            "$ref": "#/components/schemas/report"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1303,8 +1797,28 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/relatorio"
+                                            "$ref": "#/components/schemas/report"
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "400": {
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1312,7 +1826,7 @@
                     }
                 }
             },
-            "/contato/emails": {
+            "/contact/emails": {
                 "post": {
                     "summary": "Envio de email",
                     "description": "Rota responsável por enviar um email para a barbearia",
@@ -1326,13 +1840,13 @@
                                     "$ref": "#/components/schemas/email"
                                 },
                                 "examples": {
-                                    "relatorio": {
+                                    "email": {
                                         "value": {
                                             "id": 1,
-                                            "nome": "Beltrano",
+                                            "name": "Beltrano",
                                             "email": "Beltrano@Beltrano.com",
-                                            "assunto": "Qualquer coisa",
-                                            "mensagem": "lorem ipsum fake"
+                                            "subject": "Qualquer coisa",
+                                            "message": "lorem ipsum fake"
                                         }
                                     }
                                 }
@@ -1353,11 +1867,25 @@
                                 }
                             }
                         },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
                         "400": {
-                            "description": "Bad Request"
+                            "description": "Bad Request",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -1380,11 +1908,21 @@
                                     }
                                 }
                             }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/contato/emails/{id}": {
+            "/contact/emails/{id}": {
                 "get": {
                     "summary": "Email por id",
                     "description": "Rota responsável por retornar um email pelo id",
@@ -1412,11 +1950,21 @@
                                     }
                                 }
                             }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             },
-            "/endereco": {
+            "/adddress": {
                 "get": {
                     "summary": "Localização da barbearia",
                     "description": "Rota responsável por retornar o local da barbearia no maps",
@@ -1431,15 +1979,25 @@
                                     "schema": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/endereco"
+                                            "$ref": "#/components/schemas/address"
                                         }
                                     },
                                     "examples": {
-                                        "endereco": {
+                                        "address": {
                                             "value": {
-                                                "localização": "local no Google maps"
+                                                "location": "local no Google maps"
                                             }
                                         }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "Not found",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/error"
                                     }
                                 }
                             }
@@ -1450,57 +2008,59 @@
         },
         "components": {
             "schemas": {
-                "agendamento": {
+                "appointment": {
                     "type": "array",
                     "items": {
                         "properties": {
                             "id": {
-                                "type": "number"
+                                "type": "number",
+                                "example": 3
                             },
-                            "cliente": {
-                                "type": "Cliente"
+                            "client": {
+                                "type": "string",
+                                "example": "Fulano"
                             },
-                            "barbeiro": {
-                                "type": "Barbeiro"
+                            "barber": {
+                                "type": "string",
+                                "example": "Don onofre"
                             },
-                            "cadeira": {
-                                "type": "Cadeira"
+                            "chair": {
+                                "type": "number",
+                                "example": 3
                             },
-                            "data": {
-                                "type": "Date"
-                            },
-                            "hora": {
-                                "type": "Date"
+                            "date": {
+                                "type": "string",
+                                "format": "date-time"
                             }
                         }
                     }
                 },
-                "cliente": {
+                "client": {
                     "type": "array",
                     "items": {
                         "properties": {
                             "id": {
                                 "type": "number"
                             },
-                            "nome": {
+                            "name": {
                                 "type": "string"
                             },
                             "cpf": {
                                 "type": "string"
                             },
-                            "sobrenome": {
+                            "lastName": {
                                 "type": "string"
                             },
-                            "telefone": {
+                            "phone": {
                                 "type": "string"
                             },
                             "email": {
                                 "type": "string"
                             },
-                            "endereco": {
+                            "address": {
                                 "type": "string"
                             },
-                            "senha": {
+                            "password": {
                                 "type": "string"
                             },
                             "admin": {
@@ -1509,35 +2069,35 @@
                         }
                     }
                 },
-                "barbeiro": {
+                "barber": {
                     "type": "array",
                     "items": {
                         "properties": {
                             "id": {
                                 "type": "number"
                             },
-                            "nome": {
+                            "name": {
                                 "type": "string"
                             },
                             "cpf": {
                                 "type": "string"
                             },
-                            "sobrenome": {
+                            "lastName": {
                                 "type": "string"
                             },
-                            "telefone": {
+                            "phone": {
                                 "type": "string"
                             },
                             "email": {
                                 "type": "string"
                             },
-                            "endereco": {
+                            "address": {
                                 "type": "string"
                             },
-                            "sobre": {
+                            "about": {
                                 "type": "string"
                             },
-                            "senha": {
+                            "password": {
                                 "type": "string"
                             },
                             "admin": {
@@ -1553,25 +2113,25 @@
                             "id": {
                                 "type": "number"
                             },
-                            "nome": {
+                            "name": {
                                 "type": "string"
                             },
                             "cpf": {
                                 "type": "string"
                             },
-                            "sobrenome": {
+                            "lastName": {
                                 "type": "string"
                             },
-                            "telefone": {
+                            "phone": {
                                 "type": "string"
                             },
                             "email": {
                                 "type": "string"
                             },
-                            "endereco": {
+                            "address": {
                                 "type": "string"
                             },
-                            "senha": {
+                            "password": {
                                 "type": "string"
                             },
                             "admin": {
@@ -1580,84 +2140,112 @@
                         }
                     }
                 },
-                "corte": {
+                "order": {
                     "type": "array",
                     "items": {
                         "properties": {
                             "id": {
                                 "type": "number"
                             },
-                            "titulo": {
+                            "title": {
                                 "type": "string"
                             },
-                            "preco": {
+                            "price": {
                                 "type": "number"
                             },
-                            "descricao": {
+                            "description": {
                                 "type": "string"
                             }
                         }
                     }
                 },
-                "cadeira": {
+                "chair": {
                     "type": "array",
                     "items": {
                         "properties": {
                             "id": {
                                 "type": "number"
                             },
-                            "barbeiro": {
-                                "type": "Barbeiro"
+                            "barber": {
+                                "type": "Barber"
                             }
                         }
                     }
                 },
-                "relatorio": {
-                    "id": {
-                        "type": "number"
-                    },
-                    "dataInicio": {
-                        "type": "date"
-                    },
-                    "dataFim": {
-                        "type": "date"
-                    },
-                    "atendimentosDiarios": {
-                        "type": "number"
-                    },
-                    "receitaDiaria": {
-                        "type": "number"
-                    },
-                    "repasseDiario": {
-                        "type": "number"
-                    },
-                    "lucroDiario": {
-                        "type": "number"
-                    },
-                    "corteMaisVendido": {
-                        "type": "Corte"
+                "report": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "startDate": {
+                                "type": "string",
+                                "format": "date",
+                                "example":"02/04/2022"
+                            },
+                            "endDate": {
+                                "type": "string",
+                                "format": "date",
+                                "example": "06/04/2022"
+                            },
+                            "daylyAppointments": {
+                                "type": "number"
+                            },
+                            "daylyIncome": {
+                                "type": "number"
+                            },
+                            "daylyTranfer": {
+                                "type": "number"
+                            },
+                            "daylyProfit": {
+                                "type": "number"
+                            },
+                            "bestSellerOrder": {
+                                "type": "string",
+                                "example": "Moicano"
+                            }
+                        }
                     }
                 },
                 "email": {
-                    "id": {
-                        "type": "number"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "assunto": {
-                        "type": "string"
-                    },
-                    "mensagem": {
-                        "type": "string"
+                    "type": "array",
+                    "items": {
+                        "id": {
+                            "type": "number"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "subject": {
+                            "type": "string"
+                        },
+                        "message": {
+                            "type": "string"
+                        }
                     }
                 },
-                "endereco": {
-                    "local": {
-                        "type": "Google maps"
+                "address": {
+                    "type": "array",
+                    "items": {
+                        "location": {
+                            "type": "string",
+                            "format": "local no maps"
+                        }
+                    }
+                },
+                "error": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "number"
+                        },
+                        "message": {
+                            "type": "string"
+                        }
                     }
                 }
             }

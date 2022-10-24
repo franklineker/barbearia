@@ -1,46 +1,45 @@
-const { get } = require("express/lib/response")
 
 
 module.exports = app => {
 
     
-    app.route('/clientes')
-        .get(app.src.api.Cliente.getClientes)
-        .post(app.src.api.Cliente.setCliente)
+    app.route('/clients')
+        .get(app.src.api.Client.getClients)
+        .post(app.src.api.Client.setClient)
 
-    app.route('/clientes/:cpf')
-        .get(app.src.api.Cliente.getClienteByCPF)
-        .put(app.src.api.Cliente.updateCliente)
-        .delete(app.src.api.Cliente.deleteCliente)
+    app.route('/clients/:cpf')
+        .get(app.src.api.Client.getClientByCPF)
+        .put(app.src.api.Client.updateClient)
+        .delete(app.src.api.Client.deleteClient)
 
-    app.route('/barbeiros')
-        .get(app.src.api.Barbeiro.getBarbeiros)
-        .post(app.src.api.Barbeiro.setBarbeiro)
+    app.route('/barbers')
+        .get(app.src.api.Barber.getBarbers)
+        .post(app.src.api.Barber.setBarber)
 
 
-    app.route('/barbeiros/:cpf')
-        .get(app.src.api.Barbeiro.getBarbeiroByCPF)
-        .put(app.src.api.Barbeiro.updateBarbeiro)
-        .delete(app.src.api.Barbeiro.deleteBarbeiro)
+    app.route('/barbers/:cpf')
+        .get(app.src.api.Barber.getBarberByCPF)
+        .put(app.src.api.Barber.updateBarber)
+        .delete(app.src.api.Barber.deleteBarber)
         
 
-    app.route('/cadeiras')
-        .get(app.src.api.Cadeira.getCadeiras)
-        .post(app.src.api.Cadeira.setCadeira)
+    app.route('/chairs')
+        .get(app.src.api.Chair.getChairs)
+        .post(app.src.api.Chair.setChair)
 
-    app.route('/cadeiras/:id')
-        .get(app.src.api.Cadeira.getCadeiraByID)
-        .put(app.src.api.Cadeira.updateCadeira)
-        .delete(app.src.api.Cadeira.deleteCadeira)
+    app.route('/chairs/:id')
+        .get(app.src.api.Chair.getChairByID)
+        .put(app.src.api.Chair.updateChair)
+        .delete(app.src.api.Chair.deleteChair)
 
-    app.route('/cortes')
-        .get(app.src.api.Corte.getCortes)
-        .post(app.src.api.Corte.setCorte)
+    app.route('/orders')
+        .get(app.src.api.Order.getOrders)
+        .post(app.src.api.Order.setOrder)
 
-    app.route('/cortes/:id')
-        .get(app.src.api.Corte.getCorteById)
-        .put(app.src.api.Corte.updateCorte)
-        .delete(app.src.api.Corte.deleteCorte)
+    app.route('/orders/:id')
+        .get(app.src.api.Order.getOrderById)
+        .put(app.src.api.Order.updateOrder)
+        .delete(app.src.api.Order.deleteOrder)
 
     app.route('/admin')
         .get(app.src.api.Admin.getAdmin)
@@ -51,36 +50,36 @@ module.exports = app => {
         .put(app.src.api.Admin.updateAdmin)
         .delete(app.src.api.Admin.deleteAdmin)
 
-    app.route('/relatorios')
-        .get(app.src.api.Relatorio.getRelatorios)
-        .post(app.src.api.Relatorio.setRelatorio)
+    app.route('/reports')
+        .get(app.src.api.Report.getReports)
+        .post(app.src.api.Report.setReport)
 
-    app.route('/relatorios/:id')
-        .get(app.src.api.Relatorio.getRelatorioById)
-        .put(app.src.api.Relatorio.updateRelatorio)
-        .delete(app.src.api.Relatorio.deleteRelatorio)
+    app.route('/reports/:id')
+        .get(app.src.api.Report.getReportById)
+        .put(app.src.api.Report.updateReport)
+        .delete(app.src.api.Report.deleteReport)
     
-    app.route('/contato/emails')
-        .get(app.src.api.Contato.getEmails)
-        .post(app.src.api.Contato.sendEmail)
+    app.route('/contact/emails')
+        .get(app.src.api.Contact.getEmails)
+        .post(app.src.api.Contact.sendEmail)
 
-    app.route('/contato/emails/:id')
-        .get(app.src.api.Contato.getEmailById)
+    app.route('/contact/emails/:id')
+        .get(app.src.api.Contact.getEmailById)
 
-    app.route('/endereco')
-        .get(app.src.api.Endereco.mostrarLocalizacao)
+    app.route('/address')
+        .get(app.src.api.Admin.showLocation)
 
     app.route('/perfil/:cpf')
-        .get(app.src.api.Cliente.getClienteByCPF)
-        .put(app.src.api.Cliente.updateCliente)
+        .get(app.src.api.Client.getClientByCPF)
+        .put(app.src.api.Client.updateClient)
 
-    app.route('/agenda')
-        .get(app.src.api.Agenda.getAgendamentos)
-        .post(app.src.api.Agenda.setAgendamento)
+    app.route('/appointment')
+        .get(app.src.api.Appointment.getAppointments)
+        .post(app.src.api.Appointment.setAppointment)
 
-    app.route('/agenda/:id')
-        .get(app.src.api.Agenda.getAgendamentoById)
-        .put(app.src.api.Agenda.updateAgendamento)
-        .delete(app.src.api.Agenda.deleteAgendamento)
+    app.route('/appointment/:id') 
+        .get(app.src.api.Appointment.getAppointmentById)
+        .put(app.src.api.Appointment.updateAppointment)
+        .delete(app.src.api.Appointment.deleteAppointment)
 
 }
